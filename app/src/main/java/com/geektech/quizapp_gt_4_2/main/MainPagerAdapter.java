@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.geektech.quizapp_gt_4_2.settings.SettingsFragment;
+import com.geektech.quizapp_gt_4_2.settings.Settings1Fragment;
 
 public class MainPagerAdapter extends FragmentPagerAdapter {
 
@@ -23,8 +23,11 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
                 fragment = MainFragment.newInstance();
                 break;
             default:
-                fragment = SettingsFragment.newInstance();
+                fragment = Settings1Fragment.newInstance();
                 break;
+            case 1:
+                fragment = Settings1Fragment.newInstance();
+            break;
         }
 
         return fragment;
@@ -32,7 +35,7 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 }
 
