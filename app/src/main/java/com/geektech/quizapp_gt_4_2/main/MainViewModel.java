@@ -15,11 +15,6 @@ public class MainViewModel extends ViewModel {
 
     public MutableLiveData<String> message = new MutableLiveData<>();
     public MutableLiveData<Integer> button1 = new MutableLiveData<>();
-    int count1 = 0;
-
-    public void plus() {
-        button1.setValue(count1++);
-    }
 
     public MainViewModel() {
         Log.d("ololo", "View model create");

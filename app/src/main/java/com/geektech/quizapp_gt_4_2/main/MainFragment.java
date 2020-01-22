@@ -62,7 +62,7 @@ public class MainFragment extends Fragment {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                mSettingsViewModel.minus();
             }
         });
 

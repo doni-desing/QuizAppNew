@@ -48,6 +48,13 @@ public class Settings1Fragment extends Fragment {
                 textView.setText(integer.toString());
             }
         });
+        mViewModel.button1.observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                textView.setText(integer.toString());
+
+            }
+        });
     }
 
 }
