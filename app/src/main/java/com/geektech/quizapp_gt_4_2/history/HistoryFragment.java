@@ -14,24 +14,24 @@ import android.view.ViewGroup;
 
 import com.geektech.quizapp_gt_4_2.R;
 
-public class Historyragment extends Fragment {
+public class HistoryFragment extends Fragment {
 
-    private HistoryragmentViewModel mViewModel;
+    private HistoryViewModel mViewModel;
 
-    public static Historyragment newInstance() {
-        return new Historyragment();
+    public static HistoryFragment newInstance() {
+        return new HistoryFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.historyragment_fragment, container, false);
+        return inflater.inflate(R.layout.history_fragment, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(HistoryragmentViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(HistoryViewModel.class);
         // TODO: Use the ViewModel
     }
 

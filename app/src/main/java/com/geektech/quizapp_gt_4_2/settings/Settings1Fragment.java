@@ -23,7 +23,6 @@ public class Settings1Fragment extends Fragment {
     private MainViewModel mViewModel1;
     private TextView textView;
 
-
     public static Settings1Fragment newInstance() {
         return new Settings1Fragment();
     }

@@ -5,11 +5,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.geektech.quizapp_gt_4_2.history.HistoryFragment;
 import com.geektech.quizapp_gt_4_2.settings.Settings1Fragment;
 
 public class MainPagerAdapter extends FragmentPagerAdapter {
 
-    public MainPagerAdapter(@NonNull FragmentManager fm) {
+    MainPagerAdapter(@NonNull FragmentManager fm) {
         super(fm);
     }
 
@@ -23,11 +24,11 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
                 fragment = MainFragment.newInstance();
                 break;
             default:
-                fragment = Settings1Fragment.newInstance();
+                fragment = HistoryFragment.newInstance();
                 break;
             case 1:
                 fragment = Settings1Fragment.newInstance();
-            break;
+                break;
         }
 
         return fragment;
