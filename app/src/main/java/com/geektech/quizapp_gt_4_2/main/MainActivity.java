@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -40,13 +42,19 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.menu1:
+                        item.setCheckable(true);
                         mViewPager.setCurrentItem(0, true);
                         break;
                     case R.id.menu2:
+                        item.setCheckable(true);
+
                         mViewPager.setCurrentItem(1, true);
                         break;
 
                     case R.id.menu3:
+                        if (item.setCheckable(true) != null){
+
+                        }
                         mViewPager.setCurrentItem(2, true);
                         break;
                 }

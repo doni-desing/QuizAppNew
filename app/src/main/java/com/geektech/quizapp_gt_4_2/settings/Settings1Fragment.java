@@ -31,7 +31,6 @@ public class Settings1Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.settings1_fragment, container, false);
-        textView = view.findViewById(R.id.text_result);
         return view;
     }
 
