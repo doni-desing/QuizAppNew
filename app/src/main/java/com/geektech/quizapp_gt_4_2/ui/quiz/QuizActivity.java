@@ -48,6 +48,8 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
         category = getIntent().getIntExtra("niceCategory", 0)-1;
+
+
         amount = getIntent().getIntExtra("textAmoung", 0);
         difficulty = getIntent().getStringExtra("niceDifficulty");
         textCategory = findViewById(R.id.text_difficult);
