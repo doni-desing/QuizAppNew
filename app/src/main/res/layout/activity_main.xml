@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main.MainActivity">
+    tools:context=".ui.main.MainActivity">
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/main_view_pager"
@@ -20,8 +20,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:menu="@menu/bottom_navigation"
-        app:itemIconTint="#fff"
-
         android:background="#fff"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_gravity="bottom"/>

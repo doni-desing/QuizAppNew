@@ -67,6 +67,7 @@
     <string-array name="difficulty">
         <item>All</item>
         <item>Easy</item>
+        <item>Medium</item>
         <item>Hard</item>
     </string-array>
 
