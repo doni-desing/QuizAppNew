@@ -16,7 +16,6 @@ import java.util.List;
 
 public class QuizApater extends RecyclerView.Adapter<QuizViewHoler> {
     private List<Question> list;
-    int pos;
 
     private List<Question> question = new ArrayList<>();
     private QuizViewHoler viewHoler;
@@ -30,7 +29,6 @@ public class QuizApater extends RecyclerView.Adapter<QuizViewHoler> {
 
     @Override
     public void onBindViewHolder(@NonNull QuizViewHoler holder, int position) {
-        pos = position;
         holder.Question( question.get(position));
     }
 
@@ -46,7 +44,9 @@ public class QuizApater extends RecyclerView.Adapter<QuizViewHoler> {
 
     public void upData(List<Question> list){
         this.question = list;
+        list.get(0).getQuestion().replace("[\\\\><\"|*?%:#/]", "[aqwrtyujhgfd]");
         notifyDataSetChanged();
+
     }
 
 }

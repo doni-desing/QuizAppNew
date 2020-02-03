@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:navigationBarColor" tools:targetApi="o_mr1">#fff</item>
         <item name="android:statusBarColor" tools:targetApi="o_mr1">#fff</item>
         <item name="android:windowLightStatusBar" tools:targetApi="o_mr1">true</item>
 
@@ -44,4 +45,35 @@
     <style name="AppTheme.LightText">
         <item name="android:fontFamily">sans-serif-light</item>
     </style>
+
+    <style name="category_mi">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">#1F2041</item>
+    </style>
+
+    <style name="correct_ans">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#801F2041</item>
+    </style>
+
+    <style name="difficulty_">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#801F2041</item>
+    </style>
+
+    <style name="may_2019_20">
+        <item name="android:textSize">9sp</item>
+        <item name="android:textColor">#801F2041</item>
+    </style>
+
+    <style name="v_1_0_0">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#A6A6A6</item>
+    </style>
+
+    <style name="navigation">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">#1A051D</item>
+    </style>
+
 </resources>

@@ -8,12 +8,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -21,6 +25,7 @@ import com.geektech.quizapp_gt_4_2.R;
 import com.geektech.quizapp_gt_4_2.ui.model.Category;
 import com.geektech.quizapp_gt_4_2.ui.model.Question;
 import com.geektech.quizapp_gt_4_2.ui.quiz.apater.QuizApater;
+import com.geektech.quizapp_gt_4_2.ui.result.ResultActivity;
 import com.geektech.quizapp_gt_4_2.uitils.App;
 import com.geektech.quizapp_gt_4_2.ux.data.romote.IQuizApiClient;
 
@@ -32,28 +37,32 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 public class QuizActivity extends AppCompatActivity {
+
     private RecyclerView recyclerView;
     private QuizViewModel quizViewModel;
     private TextView textCategory;
+    private TextView textAmoung;
     private QuizApater apater;
+    private Button img;
     private Button button;
     private ProgressBar progressBar;
-
     private int category;
     private int amount;
     private String difficulty;
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
-        category = getIntent().getIntExtra("niceCategory", 0)-1;
 
-
+        img = findViewById(R.id.img_back);
+        category = getIntent().getIntExtra("niceCategory", 0) - 1;
         amount = getIntent().getIntExtra("textAmoung", 0);
         difficulty = getIntent().getStringExtra("niceDifficulty");
         textCategory = findViewById(R.id.text_difficult);
         button = findViewById(R.id.btn_skip);
+        textAmoung = findViewById(R.id.tv_amoung);
         progressBar = findViewById(R.id.progress_bar);
         recyclerView = findViewById(R.id.recycler_view);
 
@@ -65,10 +74,14 @@ public class QuizActivity extends AppCompatActivity {
                 recyclerView.smoothScrollToPosition(integer);
                 progressBar.setMax(amount);
                 progressBar.setProgress(integer);
+                textAmoung.setText(integer.toString() + "/" + amount);
+                if (integer > amount) {
+                    startActivity(new Intent(getApplicationContext(), ResultActivity.class));
+                }
             }
         });
 
-        quizViewModel.getQuestions(amount, category+7, difficulty);
+        quizViewModel.getQuestions(amount, category + 9, difficulty);
         showData();
         categories();
         initRecycler();
@@ -97,7 +110,6 @@ public class QuizActivity extends AppCompatActivity {
         App.quizApiClient.getCategory(new IQuizApiClient.CategoryCallback() {
             @Override
             public void onSuccess(List<Category> questions) {
-
                 textCategory.setText(questions.get(category).getName());
             }
 
@@ -113,11 +125,16 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<Question> question) {
                 apater.upData(question);
+                question.get(0).getQuestion();
             }
         });
     }
 
     public void onClick(View view) {
         quizViewModel.getPosition();
+    }
+
+    public void onClickImage(View view) {
+        quizViewModel.getMinus();
     }
 }

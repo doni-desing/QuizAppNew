@@ -30,10 +30,11 @@ public class QuizApiClint implements IQuizApiClient {
     private QuizCategory clientCategory = retrofit.create(QuizCategory.class);
     private QuizGlobal clientGlobal = retrofit.create(QuizGlobal.class);
 
+
     //region get questions
     @Override
     public MutableLiveData<Question> getQuestions(int amount, int category, String difficulty, final QuestionsCallback callback) {
-        Call<QuizQuestionsResponse> call = client.getQuestions(
+        final Call<QuizQuestionsResponse> call = client.getQuestions(
                 amount,
                 category,
                 difficulty
@@ -43,6 +44,7 @@ public class QuizApiClint implements IQuizApiClient {
             @Override
             public void onSuccess(QuizQuestionsResponse result) {
                 callback.onSuccess(result.getResults());
+                Log.d("ololol", "onSuccess: " + call.request().url());
             }
 
             @Override
@@ -53,15 +55,16 @@ public class QuizApiClint implements IQuizApiClient {
 
         return null;
     }
-    //endregion
 
     @Override
     public MutableLiveData<Category> getCategory(final CategoryCallback callback) {
-        Call<QuizCategoryResponse> call = clientCategory.getCategory();
+        final Call<QuizCategoryResponse> call = clientCategory.getCategory();
         call.enqueue(new CoreCallBack<QuizCategoryResponse>() {
             @Override
             public void onSuccess(QuizCategoryResponse result) {
                 callback.onSuccess(result.getTriviaCategories());
+                Log.d("ololol", "onSuccess Category " + call.request().url());
+
             }
 
             @Override
@@ -77,6 +80,7 @@ public class QuizApiClint implements IQuizApiClient {
 //        clientGlobal.getGlobal()
         return null;
     }
+
     private interface QuizApi {
         @GET("api.php")
         Call<QuizQuestionsResponse> getQuestions(

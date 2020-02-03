@@ -12,9 +12,7 @@ import com.geektech.quizapp_gt_4_2.uitils.App;
 import com.geektech.quizapp_gt_4_2.ux.data.romote.IQuizApiClient;
 
 import java.util.List;
-import java.util.Objects;
 
-import retrofit2.Callback;
 
 public class QuizViewModel extends ViewModel {
 
@@ -26,7 +24,7 @@ public class QuizViewModel extends ViewModel {
         App.quizApiClient.getQuestions(amount, category, difficulty, new IQuizApiClient.QuestionsCallback() {
             @Override
             public void onSuccess(List<Question> question) {
-                currentPosition.setValue(0);
+                currentPosition.setValue(1);
                 Log.d("ololo", "onChanged: " + question);
                 questions.setValue(question);
             }
@@ -38,11 +36,15 @@ public class QuizViewModel extends ViewModel {
         });
     }
 
+    public void getMinus() {
+        Integer currentPositions = currentPosition.getValue();
+            currentPosition.setValue(currentPositions - 1);
+    }
+
     public void getPosition() {
         Integer currentPositions = currentPosition.getValue();
         if (currentPositions != null) {
-                currentPosition.setValue(currentPositions + 1);
+            currentPosition.setValue(currentPositions + 1);
         }
-
     }
 }
