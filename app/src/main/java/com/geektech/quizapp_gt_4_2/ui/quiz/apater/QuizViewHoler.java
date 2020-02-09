@@ -21,6 +21,8 @@ public class QuizViewHoler extends RecyclerView.ViewHolder {
     private ConstraintLayout contenerMutable;
     private ConstraintLayout contenerBoolean;
     private TextView quistions;
+
+
     private TextView textDifficulty;
     private Button btn_1;
     private Button btn_2;
