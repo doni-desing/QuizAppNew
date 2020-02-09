@@ -1,4 +1,4 @@
-package com.geektech.quizapp_gt_4_2.ux.data.romote;
+package com.geektech.quizapp_gt_4_2.ux.data.remote;
 
 
 import com.geektech.quizapp_gt_4_2.ui.model.Category;

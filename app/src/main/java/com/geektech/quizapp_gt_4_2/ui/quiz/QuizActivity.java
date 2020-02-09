@@ -1,6 +1,5 @@
 package com.geektech.quizapp_gt_4_2.ui.quiz;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -8,49 +7,41 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.geektech.quizapp_gt_4_2.R;
 import com.geektech.quizapp_gt_4_2.ui.model.Category;
-import com.geektech.quizapp_gt_4_2.ui.model.Question;
 import com.geektech.quizapp_gt_4_2.ui.quiz.apater.QuizApater;
+import com.geektech.quizapp_gt_4_2.ui.quiz.apater.QuizViewHoler;
 import com.geektech.quizapp_gt_4_2.ui.result.ResultActivity;
-import com.geektech.quizapp_gt_4_2.uitils.App;
-import com.geektech.quizapp_gt_4_2.ux.data.romote.IQuizApiClient;
+import com.geektech.quizapp_gt_4_2.utils.App;
+import com.geektech.quizapp_gt_4_2.ux.data.remote.IQuizApiClient;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-import retrofit2.Call;
-import retrofit2.Response;
+import javax.xml.transform.Result;
 
-public class QuizActivity extends AppCompatActivity {
-
+public class QuizActivity extends AppCompatActivity implements QuizViewHoler.Listener {
+// region create Element
     private RecyclerView recyclerView;
     private QuizViewModel quizViewModel;
     private TextView textCategory;
     private TextView textAmoung;
-    private QuizApater apater;
+    private QuizApater adapter;
     private Button img;
     private Button button;
     private ProgressBar progressBar;
     private int category;
     private int amount;
     private String difficulty;
+//   endregion
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +56,7 @@ public class QuizActivity extends AppCompatActivity {
         textAmoung = findViewById(R.id.tv_amoung);
         progressBar = findViewById(R.id.progress_bar);
         recyclerView = findViewById(R.id.recycler_view);
+        onClickImage();
 
         quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
 
@@ -95,15 +87,10 @@ public class QuizActivity extends AppCompatActivity {
                 return false;
             }
         };
-        apater = new QuizApater();
+        adapter = new QuizApater(this);
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(apater);
-        recyclerView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return true;
-            }
-        });
+        recyclerView.setAdapter(adapter);
+        recyclerView.setOnTouchListener((v, event) -> true);
     }
 
     public void categories() {
@@ -111,6 +98,7 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Category> questions) {
                 textCategory.setText(questions.get(category).getName());
+
             }
 
             @Override
@@ -121,20 +109,28 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void showData() {
-        quizViewModel.questions.observe(this, new Observer<List<Question>>() {
-            @Override
-            public void onChanged(List<Question> question) {
-                apater.upData(question);
-                question.get(0).getQuestion();
-            }
+        quizViewModel.questions.observe(this, question -> {
+            adapter.setQuestions(question);
+            adapter.upData(question);
         });
     }
 
     public void onClick(View view) {
-        quizViewModel.getPosition();
+        quizViewModel.onSkip();
     }
 
-    public void onClickImage(View view) {
-        quizViewModel.getMinus();
+    public void onClickImage() {
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                quizViewModel.getMinus();
+            }
+        });
+    }
+
+    @Override
+    public void onAnswerClick(int position, int selectedAnswerPosition) {
+        quizViewModel.onAnswerClick(position, selectedAnswerPosition);
+        quizViewModel.finishQuiz.observe(this, integer -> startActivity(new Intent(getApplicationContext(), ResultActivity.class)));
     }
 }

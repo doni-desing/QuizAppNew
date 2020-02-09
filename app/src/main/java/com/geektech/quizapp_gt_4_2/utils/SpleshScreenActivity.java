@@ -1,4 +1,4 @@
-package com.geektech.quizapp_gt_4_2.uitils;
+package com.geektech.quizapp_gt_4_2.utils;
 
 import androidx.appcompat.app.AppCompatActivity;
 

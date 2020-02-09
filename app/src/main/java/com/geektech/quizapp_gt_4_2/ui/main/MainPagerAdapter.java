@@ -24,10 +24,11 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
                 fragment = MainFragment.newInstance();
                 break;
             default:
-                fragment = HistoryFragment.newInstance();
+                fragment = Settings1Fragment.newInstance();
                 break;
             case 1:
-                fragment = Settings1Fragment.newInstance();
+                fragment = HistoryFragment.newInstance();
+
                 break;
         }
 

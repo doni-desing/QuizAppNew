@@ -1,25 +1,25 @@
-package com.geektech.quizapp_gt_4_2.ux.data.romote;
+package com.geektech.quizapp_gt_4_2.ux.data.remote;
 
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
 import com.geektech.quizapp_gt_4_2.ui.model.Category;
-import com.geektech.quizapp_gt_4_2.ui.model.EDifficulty;
 import com.geektech.quizapp_gt_4_2.ui.model.Global;
 import com.geektech.quizapp_gt_4_2.ui.model.Question;
 import com.geektech.quizapp_gt_4_2.ux.core.CoreCallBack;
+import com.geektech.quizapp_gt_4_2.ux.data.QuizReposotory;
 
 import retrofit2.Call;
 
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public class QuizApiClint implements IQuizApiClient {
+
+    private QuizReposotory quizReposotory = new QuizReposotory();
 
     private Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://opentdb.com/")
@@ -28,9 +28,16 @@ public class QuizApiClint implements IQuizApiClient {
 
     private QuizApi client = retrofit.create(QuizApi.class);
     private QuizCategory clientCategory = retrofit.create(QuizCategory.class);
-    private QuizGlobal clientGlobal = retrofit.create(QuizGlobal.class);
 
 
+    /*Question shuffleAnswers(Question question) {
+        ArrayList<String> answers = new ArrayList<>();
+        answers.add(question.getCorrectAnswer());
+        answers.addAll(question.getIncorrectAnswers());
+        Collections.shuffle(answers);
+        question.setAnswers(answers);
+        return question;
+    }*/
     //region get questions
     @Override
     public MutableLiveData<Question> getQuestions(int amount, int category, String difficulty, final QuestionsCallback callback) {
@@ -45,6 +52,10 @@ public class QuizApiClint implements IQuizApiClient {
             public void onSuccess(QuizQuestionsResponse result) {
                 callback.onSuccess(result.getResults());
                 Log.d("ololol", "onSuccess: " + call.request().url());
+                for (int i = 0; i < result.getResults().size(); i++) {
+                    Question question = result.getResults().get(i);
+                    result.getResults().set(i, quizReposotory.shuffleAnswers(question));
+                }
             }
 
             @Override
@@ -79,6 +90,11 @@ public class QuizApiClint implements IQuizApiClient {
     public MutableLiveData<Global> getGlobal(GlobalCallback callback) {
 //        clientGlobal.getGlobal()
         return null;
+    }
+
+    @Override
+    public void getQuestions(QuestionsCallback callback) {
+
     }
 
     private interface QuizApi {

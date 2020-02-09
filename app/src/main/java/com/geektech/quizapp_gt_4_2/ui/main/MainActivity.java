@@ -6,16 +6,10 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
-import com.geektech.quizapp_gt_4_2.uitils.App;
 import com.geektech.quizapp_gt_4_2.R;
-import com.geektech.quizapp_gt_4_2.ux.data.romote.IQuizApiClient;
-import com.geektech.quizapp_gt_4_2.ui.model.Question;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 

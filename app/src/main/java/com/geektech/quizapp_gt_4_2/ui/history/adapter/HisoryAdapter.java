@@ -3,15 +3,11 @@ package com.geektech.quizapp_gt_4_2.ui.history.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.geektech.quizapp_gt_4_2.R;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class HisoryAdapter extends RecyclerView.Adapter<HistoryViewHolder> {
 

@@ -8,28 +8,31 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.geektech.quizapp_gt_4_2.R;
-import com.geektech.quizapp_gt_4_2.ui.model.Category;
 import com.geektech.quizapp_gt_4_2.ui.model.Question;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class QuizApater extends RecyclerView.Adapter<QuizViewHoler> {
-    private List<Question> list;
+    private List<Question> list = new ArrayList<>();
 
     private List<Question> question = new ArrayList<>();
-    private QuizViewHoler viewHoler;
+    private QuizViewHoler.Listener listener;
+
+    public QuizApater(QuizViewHoler.Listener listener) {
+        this.listener = listener;
+    }
 
     @NonNull
     @Override
     public QuizViewHoler onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_quiz, parent, false);
-        return new QuizViewHoler(view, viewHoler);
+        return new QuizViewHoler(view, listener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull QuizViewHoler holder, int position) {
-        holder.Question( question.get(position));
+        holder.Question(question.get(position));
     }
 
     @Override
@@ -37,16 +40,15 @@ public class QuizApater extends RecyclerView.Adapter<QuizViewHoler> {
         return question.size();
     }
 
-
-    public List<Question> getCateg(){
-        return list;
+    public void upData(List<Question> list) {
+        this.question = list;
+        notifyDataSetChanged();
     }
 
-    public void upData(List<Question> list){
-        this.question = list;
-        list.get(0).getQuestion().replace("[\\\\><\"|*?%:#/]", "[aqwrtyujhgfd]");
+    public void setQuestions(List<Question> question) {
+        this.list.clear();
+        this.list.addAll(question);
         notifyDataSetChanged();
-
     }
 
 }

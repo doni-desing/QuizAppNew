@@ -13,7 +13,7 @@ public class Question {
     private String category;
     @SerializedName("type")
     @Expose
-    private String type;
+    private EType type;
     @SerializedName("difficulty")
     @Expose
     private String difficulty;
@@ -26,6 +26,8 @@ public class Question {
     @SerializedName("incorrect_answers")
     @Expose
     private List<String> incorrectAnswers = null;
+    private List<String> answers;
+    private Integer selectedAnswerPosition;
 
     public String getCategory() {
         return category;
@@ -35,11 +37,11 @@ public class Question {
         this.category = category;
     }
 
-    public String getType() {
+    public EType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(EType type) {
         this.type = type;
     }
 
@@ -75,5 +77,19 @@ public class Question {
         this.incorrectAnswers = incorrectAnswers;
     }
 
+    public List<String> getAnswers() {
+        return answers;
+    }
 
+    public void setAnswers(List<String> answers) {
+        this.answers = answers;
+    }
+
+    public Integer getSelectedAnswerPosition() {
+        return selectedAnswerPosition;
+    }
+
+    public void setSelectedAnswerPosition(Integer selectedAnswerPosition) {
+        this.selectedAnswerPosition = selectedAnswerPosition;
+    }
 }
